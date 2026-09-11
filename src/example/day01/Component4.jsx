@@ -28,6 +28,7 @@ const BackComp = ({propData2, baTitle}) => {
     </>)
 }
 export default function Component4() {
+    // *추후에 연동할 벡엔드와 통신 AXIOS*
     const frontData = ['html5', 'css3', 'javascript', 'jquery'];
     const backData = ['java', 'oracle', 'jsp', 'spring boot'];
     return (<>
