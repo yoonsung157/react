@@ -1,3 +1,4 @@
+import './wook.css'
 import { Link } from "react-router-dom";
 export default function Wook(props){
     return (<>
@@ -16,6 +17,8 @@ export default function Wook(props){
                     </tr>
                 </tbody>
             </table>
+
+            <Link to="/">홈으로</Link>
         </div>
     </>)
 }

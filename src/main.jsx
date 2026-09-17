@@ -61,17 +61,17 @@ import { BrowserRouter } from "react-router-dom"; // 1. 라우터
 //     </BrowserRouter>
 // )
 
-// import App from "./example/practice3/App";
-// create.render(
-//     <BrowserRouter>
-//         <App />
-//     </BrowserRouter>
-// )
-
-// [day05]
-import App from "./example/day05/App";
+import App from "./example/practice3/App";
 create.render(
-    <BrowserRouter> {/* 최초 렌더링 컴포넌트를 감싼다. */}
+    <BrowserRouter>
         <App />
     </BrowserRouter>
 )
+
+// [day05]
+// import App from "./example/day05/App";
+// create.render(
+//     <BrowserRouter> {/* 최초 렌더링 컴포넌트를 감싼다. */}
+//         <App />
+//     </BrowserRouter>
+// )

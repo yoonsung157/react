@@ -1,3 +1,7 @@
-export default function Home( props ) {
-    return (<> 하이 </>)
+const Home = () => {
+    return(<>
+    홈 페이지
+    </>)
 }
+
+export default Home;
