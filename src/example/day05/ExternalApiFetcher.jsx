@@ -53,3 +53,14 @@ export default function ExternalApiFetcher() {
         }}> </RandomUser>
     </>);
 }
+
+/*
+    axois란? 주로 API 비동기통신
+    - 주로 외부API와 백엔드API(controller) 통신 도구
+    - content-type 기본값이 application/json
+    1. 사용법
+        const 함수명 = async( ) => {
+            const response = await axios.HTTP메소드명( "통신할주소?쿼리스트링", {body});
+            const data = response.data; 
+        }
+*/
