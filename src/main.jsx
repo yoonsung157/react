@@ -61,9 +61,11 @@ import { BrowserRouter } from "react-router-dom"; // 1. 라우터
 //     </BrowserRouter>
 // )
 
-import App from "./example/Practice3.jsx/App";
+import App from "./example/practice3/App";
 create.render(
     <BrowserRouter>
         <App />
     </BrowserRouter>
 )
+
+// [day05]
