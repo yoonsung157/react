@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Yoon( props ) {
     const [myJSON, setMyJSON ] = useState([]);
-    useEffect(async function() {
-        const response = await axios.get("https://wellness-exclusion-surfing-advisory.trycloudflare.com/api/categories")
-        const data = response.data;
-        setMyJSON( data );
+    useEffect( () =>  {
+        async function fetchData() {
+            const response = await axios.get("https://wellness-exclusion-surfing-advisory.trycloudflare.com/api/categories")
+            const data = response.data;
+            setMyJSON( data );
+        }
+        fetchData();
     }, []);
 
     let trTag = myJSON.map( data => {
@@ -28,7 +31,7 @@ export default function Yoon( props ) {
                         <td style={ { background : "#ebebeb", padding: "10px"}}>자기소개</td><td>안녕하세요</td>
                     </tr>
                 </thead>
-                <tbody> <td> 카테고리 목록 </td> <td>{trTag}</td></tbody>
+                <tbody> <tr><td> 카테고리 목록 </td><td>{trTag}</td></tr></tbody>
             </table>
         </div>
         
