@@ -19,6 +19,23 @@ export default function Yoon( props ) {
             </ul>
         );
     });
+
+    const [mydata, setMyData ] = useState([]);
+    useEffect( () => {
+        async function fetchData2() {
+            const response = await axios.get("https://hrs-requested-previews-terminal.trycloudflare.com/test")
+            const items = response.data.response.body.items.item;
+            setMyData( items );
+        }
+        fetchData2();
+    }, []);
+    let trTag2 = mydata.map( data => {
+        return (
+            <tr>
+                <td> {data.baseDate} </td> <td> {data.baseTime} </td> <td> {data.category}</td>
+            </tr>
+        )
+    })
     return (<> 
         <div>
             <h2> 최윤성 </h2>
@@ -31,7 +48,18 @@ export default function Yoon( props ) {
                         <td style={ { background : "#ebebeb", padding: "10px"}}>자기소개</td><td>안녕하세요</td>
                     </tr>
                 </thead>
-                <tbody> <tr><td> 카테고리 목록 </td><td>{trTag}</td></tr></tbody>
+                <tbody> 
+                    <tr><td> 카테고리 목록 </td><td>{trTag}</td></tr>
+                    <tr>
+                        <td>기능 수행</td><tr>
+                                            <td>날짜</td><td>시간</td><td>카테고리</td>
+                                         </tr>
+                                         {trTag2}
+                                         
+                    </tr>
+                
+                </tbody>
+
             </table>
         </div>
         
