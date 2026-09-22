@@ -61,12 +61,12 @@ import { BrowserRouter } from "react-router-dom"; // 1. 라우터
 //     </BrowserRouter>
 // )
 
-import App from "./example/practice3/App";
-create.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-)
+// import App from "./example/practice3/App";
+// create.render(
+//     <BrowserRouter>
+//         <App />
+//     </BrowserRouter>
+// )
 
 // [day05]
 // import App from "./example/day05/App";
@@ -75,3 +75,14 @@ create.render(
 //         <App />
 //     </BrowserRouter>
 // )
+
+// [day06]
+// import App from "./example/day06/App";
+// create.render(
+//     <BrowserRouter>
+//         <App />
+//     </BrowserRouter>
+// )
+
+import App from "./App";
+create.render(<App></App>)

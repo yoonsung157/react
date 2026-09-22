@@ -1,122 +1,125 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ArticleList from "./project1/article/ArticleList";
+import ArticleView from "./project1/article/ArticleView";
+import ArticleWrite from "./project1/article/ArticleWrite";
+import ArticleEdit from "./project1/article/ArticleEdit";
+import NavList from "./project1/navigation/NavList";
+import NavWrite from "./project1/navigation/NavWrite";
+import NavView from "./project1/navigation/NavView";
+import NavEdit from "./project1/navigation/NavEdit";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Header(props) {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <header>
+      <h2>{props.title}</h2>
+    </header>
+  );
 }
 
-export default App
+export default function App() {
+  const [boardData, setBoardData] = useState([
+    {no:1, title:'오늘은 React공부하는날', writer:'낙짜쌤', date:'2025-01-01', 
+    contents:'React를 \n뽀개봅시당'},
+    {no:2, title:'어제는 Javascript공부해씸', writer:'유겸쌤', date:'2025-02-02', 
+    contents:'Javascript는 할게 너무 많아요'},
+    {no:3, title:'내일은 Project해야징', writer:'미르쌤', date:'2025-03-03', 
+    contents:'Project는 뭘 만들어볼까?'},
+  ]);
+
+  const [mode, setMode] = useState('list');
+  const [no, setNo] = useState(null);
+  const [nextNo, setNextNo] = useState(4);
+
+  let articleComp, navComp, titleVar, selectRow;
+
+  if (mode ==="list") {
+    titleVar = "게시판-목록";
+    navComp = (
+      <NavList onChangeMode={() => {
+        setMode("write");
+      }}></NavList>
+    );
+    articleComp = (
+      <ArticleList boardData={boardData} onChangeMode={(no) => {
+        setMode("view");
+        setNo(no);
+      }}></ArticleList>
+    );
+  }
+  else if (mode === "view") {
+    titleVar = "게시판-열람";
+    navComp =
+      <NavView onChangeMode={(pmode) => {
+        setMode(pmode);
+      }}></NavView>
+    for(let i = 0; i < boardData.length; i++ ) {
+      if(no === boardData[i].no) {
+        selectRow = boardData[i];
+      }
+    }
+    articleComp = <ArticleView selectRow={selectRow}></ArticleView>;
+  }
+  else if (mode === "write") {
+    titleVar = "게시판-쓰기";
+    navComp = 
+      <NavWrite onChangeMode={() => {
+        setMode('list');
+      }}></NavWrite>
+    articleComp = <ArticleWrite writeAction={(t, w, c) => {
+      let nowDate = new Date().toISOString().slice(0, 10);
+      let addBoardData = {no:nextNo, title:t, writer:w, contents:c, date:nowDate};
+      let copyBoardData = [...boardData];
+      copyBoardData.push(addBoardData);
+      setBoardData(copyBoardData);
+      setNextNo(nextNo+1);
+      setMode('list');
+    }}></ArticleWrite>;
+  }
+
+  else if(mode === 'delete') {
+    let newBoardData = [];
+    for( let i = 0; i < boardData.length; i++ ) {
+      if(no != boardData[i].no ) {
+        newBoardData.push(boardData[i]);
+      }
+    }
+    setBoardData(newBoardData);
+    setMode('list');
+  }
+
+  else if (mode === 'edit') {
+    titleVar = '게시판-수정';
+    navComp = <NavEdit onChangeMode={ () => {
+      setMode('list');
+    }}
+    onBack={() => {
+      setMode('view');
+    }
+  }></NavEdit>
+
+  for(let i = 0; i < boardData.length; i++ ){
+    if(no === boardData[i].no){
+      selectRow = boardData[i];
+    }
+  }
+  articleComp = <ArticleEdit selectRow={selectRow} editAction={(t, w, c) => {
+    let editBoardData = {no:no, title:t, writer:w, contents:c, date:selectRow.date};
+    let copyBoardData = [...boardData];
+    for(let i = 0; i < copyBoardData.length; i++ ){
+      if(copyBoardData[i].no === no ) {
+        copyBoardData[i] = editBoardData;
+        break;
+      }
+    }
+    setBoardData(copyBoardData);
+    setMode('view');
+  }}></ArticleEdit>;
+  }
+  return (
+    <>
+      <Header title={titleVar}></Header>
+      {navComp}
+      {articleComp}
+    </>
+  );
+}
