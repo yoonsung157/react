@@ -84,5 +84,9 @@ import { BrowserRouter } from "react-router-dom"; // 1. 라우터
 //     </BrowserRouter>
 // )
 
-import App from "./App";
-create.render(<App></App>)
+// import App from "./App";
+// create.render(<App></App>)
+
+// [day07]
+import App from "./example/day07/App";
+create.render(<BrowserRouter> <App> </App> </BrowserRouter>)
