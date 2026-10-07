@@ -52,7 +52,7 @@ const create = createRoot( root );
 // create.render(<Component3> </Component3>)
 
 // [day04]
-import { BrowserRouter } from "react-router-dom"; // 1. 라우터
+
 // import App from "./example/day04/App";
 // // 2. 최초 렌더링 되는 컴포넌트 앞뒤로 라우터컴포넌트 감싼다.
 // create.render( 
@@ -92,5 +92,9 @@ import { BrowserRouter } from "react-router-dom"; // 1. 라우터
 // create.render(<BrowserRouter> <App> </App> </BrowserRouter>)
 
 
-import App from "./example/day10/App";
-create.render(<BrowserRouter><App/></BrowserRouter>)
+
+
+// day14
+import { BrowserRouter } from "react-router-dom";
+import ChatRoom from "./example/day14/ChatRoom";
+create.render(<ChatRoom/>)
