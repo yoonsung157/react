@@ -60,13 +60,13 @@ const create = createRoot( root );
 //         <App /> 
 //     </BrowserRouter>
 // )
-
-// import App from "./example/practice3/App";
-// create.render(
-//     <BrowserRouter>
-//         <App />
-//     </BrowserRouter>
-// )
+import { BrowserRouter } from "react-router-dom";
+import App from "./example/practice3/App";
+create.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+)
 
 // [day05]
 // import App from "./example/day05/App";
@@ -95,6 +95,10 @@ const create = createRoot( root );
 
 
 // day14
-import { BrowserRouter } from "react-router-dom";
-import ChatRoom from "./example/day14/ChatRoom";
-create.render(<ChatRoom/>)
+
+// import ChatRoom from "./example/day14/ChatRoom";
+// create.render(<ChatRoom/>)
+
+// day15
+// import ChatBot from "./example/day15/ChatBot";
+// create.render(<ChatBot/>)
